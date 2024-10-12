@@ -42,7 +42,7 @@ const Display = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.post("http://localhost:8080/upload-image", formData, {
+      await axios.post("https://doc-man.vercel.app/upload-image", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           "x-auth-token": token,
@@ -62,7 +62,7 @@ const Display = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const result = await axios.get("http://localhost:8080/get-image", {
+      const result = await axios.get("https://doc-man.vercel.app/get-image", {
         headers: { "x-auth-token": token },
       });
       setAllImage(result.data.data || []);
@@ -96,7 +96,7 @@ const Display = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:8080/download-image/${filename}`,
+        `https://doc-man.vercel.app/download-image/${filename}`,
         {
           headers: { "x-auth-token": token },
           responseType: "blob", // Important to handle the file download
@@ -117,7 +117,7 @@ const Display = () => {
   const deleteImage = async (filename) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:8080/delete-image/${filename}`, {
+      await axios.delete(`https://doc-man.vercel.app/delete-image/${filename}`, {
         headers: { "x-auth-token": token },
       });
       getImage(); // Fetch the updated image list after deletion
