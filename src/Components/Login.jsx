@@ -48,7 +48,7 @@ const Login = () => {
     }
 
     try {
-      const url = `https://doc-man.vercel.app/auth/login`;
+      const url = `https://new-seven-pi.vercel.app/auth/login`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
