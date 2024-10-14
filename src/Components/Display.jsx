@@ -42,7 +42,7 @@ const Display = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.post("https://doc-man.vercel.app/upload-image", formData, {
+      await axios.post("https://new-seven-pi.vercel.app/upload-image", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           "x-auth-token": token,
@@ -62,7 +62,7 @@ const Display = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const result = await axios.get("https://doc-man.vercel.app/get-image", {
+      const result = await axios.get("https://new-seven-pi.vercel.app/get-image", {
         headers: { "x-auth-token": token },
       });
       setAllImage(result.data.data || []);
