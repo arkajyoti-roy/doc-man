@@ -9,6 +9,8 @@ const fs = require('fs');
 const AuthRouter = require('./Routes/AuthRouter');
 const UserModel = require('./Models/User');
 const authenticateJWT = require('./Middlewares/authenticateJWT'); // Import middleware
+const axios = require('axios');
+
 
 require('dotenv').config();
 require('./Models/db');
@@ -135,6 +137,24 @@ app.delete("/delete-image/:filename", authenticateJWT, async (req, res) => {
   } catch (error) {
     console.error(`Error: ${error}`);
     res.status(500).json({ status: "error", error });
+  }
+});
+
+
+app.get('/download', async (req, res) => {
+  const fileUrl = req.query.url;
+  try {
+    const response = await axios({
+      url: fileUrl,
+      method: 'GET',
+      responseType: 'stream'
+    });
+
+    res.setHeader('Content-Type', response.headers['content-type']);
+    response.data.pipe(res);
+  } catch (error) {
+    console.error('Error downloading file:', error);
+    res.status(500).send('Error downloading file');
   }
 });
 
